@@ -1,6 +1,9 @@
+import sys
+sys.path.append('./')
 from bert_models import *
 from sklearn.model_selection import train_test_split
 import csv
+
 
 topic_ids_map = {}
 def load_examples(input_file):
