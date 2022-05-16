@@ -1,6 +1,7 @@
 import sys
 sys.path.append('./')
-from bert_models import *
+from bert_for_text_classification import *
+from bert_utils import *
 from sklearn.model_selection import train_test_split
 import csv
 
