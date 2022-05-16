@@ -58,8 +58,8 @@ if __name__ == "__main__":
     #  Read the QC dataset
     #--------------------------------
 
-    train_filename = "data_qc/train_5500.label"
-    test_filename = "data_qc/TREC_10.label"
+    train_filename = "examples/data_qc/train_5500.label"
+    test_filename = "examples/data_qc/TREC_10.label"
     examples, labels = load_qc_examples(train_filename, False)
     t_examples, t_labels = load_qc_examples(test_filename, False)
     print("labels: " + str(set(labels)))
@@ -94,7 +94,7 @@ if __name__ == "__main__":
         model.cuda()
     
     #start training
-    # model.start_training(train_examples, dev_examples, params)
+    model.start_training(train_examples, dev_examples, params)
 
     #after training load the best model
     model_to_load = "best_model.pickle"
@@ -102,11 +102,11 @@ if __name__ == "__main__":
     model.eval()
 
     test_dataloader = generate_data_loader(test_examples, params.label_to_id, model.tokenizer, params.max_seq_length, params.batch_size, do_shuffle=False)
-    evaluate(test_dataloader, model, params, print_classification_output=True, print_result_summary=True)
-    # ex, probs = getClassProbabilities(model, test_dataloader, params.device)
+    evaluate(test_dataloader, model, params, print_classification_output=True)
+    ex, probs = getClassProbabilities(model, test_dataloader, params.device)
     
-    # for i in range(0, len(ex)):
-    #     print ("{} - {} - {}".format(ex[i], max(probs[i]), params.id_to_label[probs[i].index(max(probs[i]))]))
+    for i in range(0, len(ex)):
+        print ("{} - {} - {}".format(ex[i], max(probs[i]), params.id_to_label[probs[i].index(max(probs[i]))]))
 
 
 

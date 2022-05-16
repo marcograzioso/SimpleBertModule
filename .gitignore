@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#models cache dir
+new_cache_dir
+
+#pickle models
+*.pickle
