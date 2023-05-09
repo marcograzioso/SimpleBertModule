@@ -19,7 +19,7 @@ class Classifier(nn.Module):
     """
     def __init__(self, model_name, params = None):
         super(Classifier, self).__init__()
-        # params = params
+        self.params = params
         # Load the BERT-based encoder
         self.encoder = AutoModel.from_pretrained(model_name, cache_dir="new_cache_dir/")
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="new_cache_dir/")
