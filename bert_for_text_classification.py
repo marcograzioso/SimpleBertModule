@@ -292,7 +292,7 @@ def getClassProbabilities(classifier, dataloader, device):
         # in the method `generate_data_loader`
         b_input_ids = batch[0].to(device)
         b_input_mask = batch[1].to(device)
-        b_labels = batch[2].to(device)
+        # b_labels = batch[2].to(device)
         
         # Tell pytorch not to bother with constructing the compute graph during
         # the forward pass, since this is only needed for backprop (training).
