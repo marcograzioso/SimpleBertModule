@@ -249,13 +249,13 @@ def evaluate(dataloader, model, params, print_classification_output=False, epoch
                 input_strings = tokenizer.decode(b_input_ids[ex_id], skip_special_tokens=True)
                 # convert class id to the real label
                 for i in range(params.num_heads):
-                    predicted_label = params.id_to_label[preds[i][ex_id].item()]
+                    predicted_label = params.id_to_label[i][preds[i][ex_id].item()]
                     gold_standard_label = "UNKNOWN"
                     # convert the gold standard class ID into a real label
-                    if b_labels[ex_id].item() in params.id_to_label:
-                        gold_standard_label = params.id_to_label[b_labels[i][ex_id].item()]
+                    if gold_classes[i][ex_id].item() in params.id_to_label[i]:
+                        gold_standard_label = params.id_to_label[i][gold_classes[i][ex_id].item()]
                     # put the prefix "[OK]" if the classification is correct
-                    output[i] = '[OK]' if predicted_label[i] == gold_standard_label[i] else '[NO]'
+                    output[i] = '[OK]' if predicted_label == gold_standard_label else '[NO]'
                 # print the output
                 print("\t".join(output) + "\t" + gold_standard_label + "\t" + predicted_label + "\t" + input_strings)
     
